@@ -1,0 +1,11 @@
+{
+  "training_run": "2026-10-27_17-25-46_ros_dr_7cm",
+  "robot_lab_upstream_commit": "500399ed75f510aeaff28705a8ce736c514dbec3",
+  "files_sha256": {
+    "native_ort_report.json": "15a11635c97d17f3b81783007f6950739986cec6afb115d9e4638596140289c9",
+    "model_2999.pt": "be6560133b3ae7284a689debe72aa33bcedc23d428ab3fc011982fc1908b1a76",
+    "params/env.yaml": "47e66eb1ffe98ce1d3c68e81790e8cb662f5510fdd824991a32117d6a873a408",
+    "params/agent.yaml": "1656accb6095c32e4d1d13ccddfd648f2429c5b34b7ef306b0d42e9d22355c85"
+  },
+  "notes": "Saved configs preserve original provenance paths. Runtime commands use repository-relative locations. Only final DR checkpoint archived; no logs, intermediates or build artifacts."
+}

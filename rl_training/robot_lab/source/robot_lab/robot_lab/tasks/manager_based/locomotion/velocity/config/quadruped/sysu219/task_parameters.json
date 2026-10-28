@@ -1,0 +1,219 @@
+{
+  "task_id": "RobotLab-Isaac-Trot-InPlace-SYSU219-v0",
+  "period_s": 0.975,
+  "stance_ratio": 0.6666666666666666,
+  "clearance_m": 0.07,
+  "settle_s": 0.5,
+  "ramp_s": 1.0,
+  "transition_margin": 0.04,
+  "foot_radius_m": 0.02,
+  "target_base_height_m": 0.43736550108464034,
+  "spawn_clearance_m": 0.01,
+  "default_joint_positions": [
+    0.0,
+    0.9,
+    -1.53,
+    0.0,
+    0.9,
+    -1.53,
+    0.0,
+    0.9,
+    -1.3,
+    0.0,
+    0.9,
+    -1.3
+  ],
+  "action_scales": [
+    0.08,
+    0.2,
+    0.25,
+    0.08,
+    0.2,
+    0.25,
+    0.08,
+    0.2,
+    0.25,
+    0.08,
+    0.2,
+    0.25
+  ],
+  "action_clip": 2.0,
+  "foot_phase_offsets": [
+    0.0,
+    0.5,
+    0.5,
+    0.0
+  ],
+  "nominal_feet_xy_m": [
+    [
+      0.2725648552583156,
+      -0.2183
+    ],
+    [
+      0.2725648552583156,
+      0.2183
+    ],
+    [
+      -0.4752444922328959,
+      -0.2183
+    ],
+    [
+      -0.4752444922328959,
+      0.2183
+    ]
+  ],
+  "policy_observation_terms": [
+    [
+      "base_ang_vel",
+      3
+    ],
+    [
+      "projected_gravity",
+      3
+    ],
+    [
+      "joint_pos",
+      12
+    ],
+    [
+      "joint_vel",
+      12
+    ],
+    [
+      "actions",
+      12
+    ],
+    [
+      "gait_clock",
+      3
+    ]
+  ],
+  "critic_extra_terms": [
+    [
+      "base_lin_vel",
+      3
+    ],
+    [
+      "anchor_error",
+      4
+    ]
+  ],
+  "policy_observation_dimension": 45,
+  "critic_observation_dimension": 52,
+  "physics_dt_s": 0.002,
+  "decimation": 10,
+  "episode_length_s": 20.0,
+  "initial_root_rotation_wxyz": [
+    0.9997703333241091,
+    0.0,
+    0.021430833044931735,
+    0.0
+  ],
+  "nominal_projected_gravity_b": [
+    0.042851822193489465,
+    0.0,
+    -0.9990814387900006
+  ],
+  "ros_nominal": {
+    "kp": 260.0,
+    "kd": 3.8,
+    "joint_limits": {
+      "FR_hip_joint": {
+        "lower": -0.638,
+        "upper": 0.748,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "FR_thigh_joint": {
+        "lower": -0.623,
+        "upper": 1.65,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "FR_calf_joint": {
+        "lower": -2.322,
+        "upper": -0.888,
+        "velocity": 20.0,
+        "effort": 100.0
+      },
+      "FL_hip_joint": {
+        "lower": -0.638,
+        "upper": 0.748,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "FL_thigh_joint": {
+        "lower": -0.623,
+        "upper": 1.65,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "FL_calf_joint": {
+        "lower": -2.322,
+        "upper": -0.888,
+        "velocity": 20.0,
+        "effort": 100.0
+      },
+      "RR_hip_joint": {
+        "lower": -0.638,
+        "upper": 0.748,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "RR_thigh_joint": {
+        "lower": -0.623,
+        "upper": 1.65,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "RR_calf_joint": {
+        "lower": -2.322,
+        "upper": -0.888,
+        "velocity": 20.0,
+        "effort": 100.0
+      },
+      "RL_hip_joint": {
+        "lower": -0.638,
+        "upper": 0.748,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "RL_thigh_joint": {
+        "lower": -0.623,
+        "upper": 1.65,
+        "velocity": 19.95,
+        "effort": 100.0
+      },
+      "RL_calf_joint": {
+        "lower": -2.322,
+        "upper": -0.888,
+        "velocity": 20.0,
+        "effort": 100.0
+      }
+    },
+    "torque_response_time_s": 0.004,
+    "actuator_dt_s": 0.002,
+    "ground_friction": 0.2,
+    "controller_rate_hz": 250,
+    "actuator_rate_hz": 500,
+    "source_sha256": {
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/config/robot_control.yaml": "fab53731a564ad7b71e049ebf6ca9bbc73e95e37e67e9da64cb25bd6ed5491c3",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/config/gazebo.yaml": "406855d0200337dc70b2a798901f222293507af4a68c5b4d08d58d8c6b8c5331",
+      "src/quadruped_ros2_control-humble/hardwares/hardware_sysu219/src/HardwareSysu219.cpp": "94453dc227f5e18a1943d116f5021ca485ad6f91f75bb1ad1cb74a128c5e1889",
+      "src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/src/Sysu219GuideController.cpp": "03c6457820d729d0c8103bffc35d1e900151a01a9fb9da6920f58320acccd9b4",
+      "src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/src/FSM/StateTrotting.cpp": "83beda6612c97e27e49f3cd458bcd4a8c692925466622d072417342599a99f3a",
+      "src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/launch/slippery_ground.world": "99d3d819a1a5f131ac1fe2e2eef7a8eb15f0094bee9ef376d8358cd8b339b485",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/const.xacro": "7e7f28c17f5a3ccd06524d298fc0eb8f212f133e2d49196e2be06286c5f10217",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/depthCamera.xacro": "9a87844188d80bae9450e975d163d4dc33cb279147e6b6b2788c49aabb71987c",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/ft_sensor.xacro": "5e3fcfb77b3718cda27acd4f8c13d2e986dbc01e6485afd5c5f484fbcb8c7fee",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/gazebo.xacro": "a2c9c8902e6db3ee1be6e6e70a92dbc389236ebc69b9a43799ebe477b97d51c9",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/gazebo_classic.xacro": "4765ac3033e26bfcfd5a8ec848d9f23415eb947bbb485ad6ac86bf540f7d0069",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/leg.xacro": "dee095043acf2d57c7712fad3b5880e3b7a3437f4dea1decb97aabfe60f5fd4c",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/materials.xacro": "5788edc266003811f5b8ccf6735c5e590a720e67e15549b50fc5cb9033febc0b",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/robot.xacro": "2738079beddb88d37e6bf3aed78acd8fc7828f19126ef4efa68d4aa90316fb9d",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/ros2_control.xacro": "0a2377d44e640e06aaf8417037485969b002ea4b4d2aad15d493a04de31657e6",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/transmission.xacro": "ff437ff44f86f86db5236738edd826a4c7ac350a1819b79a42d092c18ce6fb8b",
+      "src/quadruped_ros2_control-humble/descriptions/sysu219/sysu219_description/xacro/ultraSound.xacro": "036d112c41fdd7bb71ed73d3f00ab4e5fccb2c9db2e69c2af5e07875163c5106"
+    }
+  }
+}

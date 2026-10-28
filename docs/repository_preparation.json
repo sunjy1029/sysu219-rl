@@ -1,0 +1,17 @@
+{
+  "new_regular_files": 898,
+  "new_bytes": 584768988,
+  "new_files_at_least_50_MiB": [
+    {
+      "path": "rl_training/robot_lab/source/robot_lab/data/Robots/unitree/b2w_description/meshes/base_link.dae",
+      "bytes": 71748110
+    }
+  ],
+  "nested_git_in_robot_lab": false,
+  "original_robot_lab_retained": true,
+  "checkpoint_archive_hashes": "passed",
+  "source_setup": "local IsaacLab and vendored robot_lab",
+  "committed": false,
+  "pushed": false,
+  "compiled": false
+}

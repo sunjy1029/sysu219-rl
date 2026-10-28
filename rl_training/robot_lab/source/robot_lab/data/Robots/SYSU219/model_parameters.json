@@ -1,0 +1,200 @@
+{
+  "source_package": "sysu219_description",
+  "source_entry": "xacro/robot.xacro",
+  "source_sha256": {
+    "xacro/const.xacro": "7e7f28c17f5a3ccd06524d298fc0eb8f212f133e2d49196e2be06286c5f10217",
+    "xacro/depthCamera.xacro": "9a87844188d80bae9450e975d163d4dc33cb279147e6b6b2788c49aabb71987c",
+    "xacro/ft_sensor.xacro": "5e3fcfb77b3718cda27acd4f8c13d2e986dbc01e6485afd5c5f484fbcb8c7fee",
+    "xacro/gazebo.xacro": "a2c9c8902e6db3ee1be6e6e70a92dbc389236ebc69b9a43799ebe477b97d51c9",
+    "xacro/gazebo_classic.xacro": "4765ac3033e26bfcfd5a8ec848d9f23415eb947bbb485ad6ac86bf540f7d0069",
+    "xacro/leg.xacro": "dee095043acf2d57c7712fad3b5880e3b7a3437f4dea1decb97aabfe60f5fd4c",
+    "xacro/materials.xacro": "5788edc266003811f5b8ccf6735c5e590a720e67e15549b50fc5cb9033febc0b",
+    "xacro/robot.xacro": "2738079beddb88d37e6bf3aed78acd8fc7828f19126ef4efa68d4aa90316fb9d",
+    "xacro/ros2_control.xacro": "0a2377d44e640e06aaf8417037485969b002ea4b4d2aad15d493a04de31657e6",
+    "xacro/transmission.xacro": "ff437ff44f86f86db5236738edd826a4c7ac350a1819b79a42d092c18ce6fb8b",
+    "xacro/ultraSound.xacro": "036d112c41fdd7bb71ed73d3f00ab4e5fccb2c9db2e69c2af5e07875163c5106",
+    "config/robot_control.yaml": "fab53731a564ad7b71e049ebf6ca9bbc73e95e37e67e9da64cb25bd6ed5491c3"
+  },
+  "mesh_sha256": {
+    "meshes/calf.dae": "82b59391524d0a4597bdbc6eddb890ad3983b2a7d6749ca261ac512c55c72b5a",
+    "meshes/hip.dae": "2023075cf2e6ebca8e7cd22d4f66cbd268780d913b0eef5f31220486693c5867",
+    "meshes/thigh.dae": "431a926ef0f4e133f5be1e268ae06bc28419af91ac412c065a68295a5a6da75c",
+    "meshes/thigh_mirror.dae": "260a853fb98262d98d96598a2ba1bedeb6f2d7b43935c68c21f32be764370f21",
+    "meshes/trunk.dae": "f8c2cc52be4de450c010faaff01a87400efd32e28482b69000e515f351cfa15d"
+  },
+  "total_mass_kg": 41.281929589959766,
+  "trunk_mass_kg": 23.262327999999997,
+  "joint_names": [
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint"
+  ],
+  "joints": {
+    "FR_hip_joint": {
+      "default_position": 0.0,
+      "effort": 100.0,
+      "lower": -0.863,
+      "upper": 0.863,
+      "velocity": 30.1,
+      "viscous_friction": 9.833942875227822e-10,
+      "coulomb_friction": 1.0170625680080705,
+      "armature": 0.0
+    },
+    "FR_thigh_joint": {
+      "default_position": 0.9,
+      "effort": 100.0,
+      "lower": -2.1,
+      "upper": 4.501,
+      "velocity": 30.1,
+      "viscous_friction": 0.09591841174893605,
+      "coulomb_friction": 1.2980958388469037,
+      "armature": 0.0
+    },
+    "FR_calf_joint": {
+      "default_position": -1.53,
+      "effort": 100.0,
+      "lower": -2.818,
+      "upper": -0.888,
+      "velocity": 20.06,
+      "viscous_friction": 1.6499038712067307e-09,
+      "coulomb_friction": 1.0794450668988391,
+      "armature": 0.055704868111569605
+    },
+    "FL_hip_joint": {
+      "default_position": 0.0,
+      "effort": 100.0,
+      "lower": -0.863,
+      "upper": 0.863,
+      "velocity": 30.1,
+      "viscous_friction": 9.833942875227822e-10,
+      "coulomb_friction": 1.0170625680080705,
+      "armature": 0.0
+    },
+    "FL_thigh_joint": {
+      "default_position": 0.9,
+      "effort": 100.0,
+      "lower": -2.1,
+      "upper": 4.501,
+      "velocity": 30.1,
+      "viscous_friction": 0.09591841174893605,
+      "coulomb_friction": 1.2980958388469037,
+      "armature": 0.0
+    },
+    "FL_calf_joint": {
+      "default_position": -1.53,
+      "effort": 100.0,
+      "lower": -2.818,
+      "upper": -0.888,
+      "velocity": 20.06,
+      "viscous_friction": 1.6499038712067307e-09,
+      "coulomb_friction": 1.0794450668988391,
+      "armature": 0.055704868111569605
+    },
+    "RR_hip_joint": {
+      "default_position": 0.0,
+      "effort": 100.0,
+      "lower": -0.863,
+      "upper": 0.863,
+      "velocity": 30.1,
+      "viscous_friction": 9.833942875227822e-10,
+      "coulomb_friction": 1.0170625680080705,
+      "armature": 0.0
+    },
+    "RR_thigh_joint": {
+      "default_position": 0.9,
+      "effort": 100.0,
+      "lower": -2.1,
+      "upper": 4.501,
+      "velocity": 30.1,
+      "viscous_friction": 0.09591841174893605,
+      "coulomb_friction": 1.2980958388469037,
+      "armature": 0.0
+    },
+    "RR_calf_joint": {
+      "default_position": -1.3,
+      "effort": 100.0,
+      "lower": -2.818,
+      "upper": -0.888,
+      "velocity": 20.06,
+      "viscous_friction": 1.6499038712067307e-09,
+      "coulomb_friction": 1.0794450668988391,
+      "armature": 0.055704868111569605
+    },
+    "RL_hip_joint": {
+      "default_position": 0.0,
+      "effort": 100.0,
+      "lower": -0.863,
+      "upper": 0.863,
+      "velocity": 30.1,
+      "viscous_friction": 9.833942875227822e-10,
+      "coulomb_friction": 1.0170625680080705,
+      "armature": 0.0
+    },
+    "RL_thigh_joint": {
+      "default_position": 0.9,
+      "effort": 100.0,
+      "lower": -2.1,
+      "upper": 4.501,
+      "velocity": 30.1,
+      "viscous_friction": 0.09591841174893605,
+      "coulomb_friction": 1.2980958388469037,
+      "armature": 0.0
+    },
+    "RL_calf_joint": {
+      "default_position": -1.3,
+      "effort": 100.0,
+      "lower": -2.818,
+      "upper": -0.888,
+      "velocity": 20.06,
+      "viscous_friction": 1.6499038712067307e-09,
+      "coulomb_friction": 1.0794450668988391,
+      "armature": 0.055704868111569605
+    }
+  },
+  "stand_kp": 260.0,
+  "stand_kd": 3.8,
+  "initial_height_m": 0.46734721780455124,
+  "feet_in_base_m": {
+    "FR": [
+      0.29019935999724183,
+      -0.2183,
+      -0.40530222461122845
+    ],
+    "FL": [
+      0.29019935999724183,
+      0.2183,
+      -0.40530222461122845
+    ],
+    "RR": [
+      -0.4569230788348892,
+      -0.2183,
+      -0.4373472178045512
+    ],
+    "RL": [
+      -0.4569230788348892,
+      0.2183,
+      -0.4373472178045512
+    ]
+  },
+  "initial_foot_clearance_m": {
+    "FR": 0.04204499319332279,
+    "FL": 0.04204499319332279,
+    "RR": 0.010000000000000026,
+    "RL": 0.010000000000000026
+  },
+  "isaac_import": {
+    "root_link": "trunk",
+    "mesh_format": "OBJ",
+    "foot_regularization_mass_kg": 1e-06,
+    "expected_total_mass_kg": 41.28193358995976
+  }
+}

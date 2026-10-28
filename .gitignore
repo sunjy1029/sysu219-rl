@@ -5,3 +5,18 @@ log/
 # Python 构建产物（colcon --symlink-install 时会在源码树里生成）
 __pycache__/
 *.py[cod]
+
+# 本机状态及调试产物（可复现配置和报告另存于 rl_training/experiments）
+/.agents/
+/.codex/
+/.aws/
+/analysis/
+**/logs/
+**/runs/
+**/outputs/
+**/recordings/
+**/videos/
+**/.pytest_cache/
+*.egg-info/
+*.dmp
+.DS_Store

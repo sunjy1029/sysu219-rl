@@ -1,0 +1,204 @@
+{
+  "contract": {
+    "schema": "sysu219_trot_v1",
+    "observation_dimension": 45,
+    "action_dimension": 12,
+    "joint_names": [
+      "FR_hip_joint",
+      "FR_thigh_joint",
+      "FR_calf_joint",
+      "FL_hip_joint",
+      "FL_thigh_joint",
+      "FL_calf_joint",
+      "RR_hip_joint",
+      "RR_thigh_joint",
+      "RR_calf_joint",
+      "RL_hip_joint",
+      "RL_thigh_joint",
+      "RL_calf_joint"
+    ],
+    "observation_terms": [
+      "base_ang_vel",
+      "projected_gravity",
+      "joint_pos",
+      "joint_vel",
+      "actions",
+      "gait_clock"
+    ],
+    "observation_preprocessing": {
+      "base_ang_vel": {
+        "clip": [
+          -100.0,
+          100.0
+        ],
+        "scale": 0.25
+      },
+      "projected_gravity": {
+        "clip": [
+          -1.0,
+          1.0
+        ],
+        "scale": 1.0
+      },
+      "joint_pos": {
+        "clip": [
+          -100.0,
+          100.0
+        ],
+        "scale": 1.0
+      },
+      "joint_vel": {
+        "clip": [
+          -100.0,
+          100.0
+        ],
+        "scale": 0.05
+      },
+      "actions": {
+        "clip": [
+          -2.0,
+          2.0
+        ],
+        "scale": 1.0
+      },
+      "gait_clock": {
+        "clip": null,
+        "scale": 1.0
+      }
+    },
+    "default_joint_positions": [
+      0.0,
+      0.8,
+      -1.6,
+      0.0,
+      0.8,
+      -1.6,
+      0.0,
+      0.8,
+      -1.6,
+      0.0,
+      0.8,
+      -1.6
+    ],
+    "default_joint_velocities": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "action_scales": [
+      0.08,
+      0.2,
+      0.25,
+      0.08,
+      0.2,
+      0.25,
+      0.08,
+      0.2,
+      0.25,
+      0.08,
+      0.2,
+      0.25
+    ],
+    "action_clip": 2.0,
+    "target_min": [
+      -0.16,
+      0.4,
+      -2.1,
+      -0.16,
+      0.4,
+      -2.1,
+      -0.16,
+      0.4,
+      -2.1,
+      -0.16,
+      0.4,
+      -2.1
+    ],
+    "target_max": [
+      0.16,
+      1.2000000000000002,
+      -1.1,
+      0.16,
+      1.2000000000000002,
+      -1.1,
+      0.16,
+      1.2000000000000002,
+      -1.1,
+      0.16,
+      1.2000000000000002,
+      -1.1
+    ],
+    "kp": [
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0,
+      260.0
+    ],
+    "kd": [
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8,
+      3.8
+    ],
+    "effort_limits": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "policy_dt_s": 0.02,
+    "clock": {
+      "period_s": 1.0,
+      "settle_s": 0.5,
+      "ramp_s": 1.0
+    },
+    "input_name": "obs",
+    "output_name": "actions"
+  },
+  "contract_sha256": "a409fdae0d410b9ade42a5180720ecaaf327230c6ccad00eec0eb157f4d71900",
+  "checkpoint": "/home/sun/219_rl/robot_lab/logs/rsl_rl/sysu219_trot_in_place/2026-10-26_18-32-20_baseline/model_2999.pt",
+  "checkpoint_sha256": "f128e5433928cb8c7b11cc4b2fc452ba0ab5a079789623d5ece38ba8f2e54487",
+  "env_sha256": "dd727ef8952b8ed1e8642c4e58312ce504568cf01bc7d61dc74975a1b3700894",
+  "agent_sha256": "df652bf642e7cf53dac46ac2d9cbbaa00818a01d989cb27b7b209449546fc831",
+  "onnx_sha256": "ea597a037e2bc9292901c2a2658ce339d2b27bfbf177e399daf02a34f3eea841",
+  "onnx_ir_version": 8,
+  "verification": {
+    "backend": "onnx.reference.ReferenceEvaluator",
+    "samples": 256,
+    "max_abs_error": 9.5367431640625e-07,
+    "cpp_compiled_or_executed": false
+  }
+}

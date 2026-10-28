@@ -1,0 +1,8 @@
+{
+  "backend": "prebuilt /opt/onnxruntime C API through ctypes",
+  "version": "1.18.1",
+  "samples": 256,
+  "max_abs_error": 2.384185791015625e-06,
+  "cpp_compiled": false,
+  "ros_controller_executed": false
+}
