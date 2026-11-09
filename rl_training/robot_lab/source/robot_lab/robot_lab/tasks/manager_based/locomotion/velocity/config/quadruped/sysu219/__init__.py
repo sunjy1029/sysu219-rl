@@ -4,7 +4,10 @@ import gymnasium as gym
 
 
 for task_id, env_class in (
+
     ("RobotLab-Isaac-Trot-InPlace-SYSU219-v0", "SYSU219TrotEnvCfg"),
+    ("RobotLab-Isaac-Trot-InPlace-SYSU219-DR-AR003-v0", "SYSU219TrotDRAR003EnvCfg"),
+    ("RobotLab-Isaac-Trot-InPlace-SYSU219-DR-Delay008-v0", "SYSU219TrotDRDelay008EnvCfg"),
     ("RobotLab-Isaac-Trot-InPlace-SYSU219-Play-v0", "SYSU219TrotEnvCfg_PLAY"),
     ("RobotLab-Isaac-Trot-InPlace-SYSU219-DR-v0", "SYSU219TrotDREnvCfg"),
     ("RobotLab-Isaac-Trot-InPlace-SYSU219-DR-Play-v0", "SYSU219TrotDREnvCfg_PLAY"),

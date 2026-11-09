@@ -65,7 +65,7 @@ sysu219_guide_controller:
     gazebo_com_visualization: true
     update_rate: 250  # Hz
     # RLWALK: exported 45D in-place trot actor; filename is relative to controller package model/.
-    rl_model_path: "policy_trot_ros_dr_7cm.onnx"
+    rl_model_path: "policy_trot_dr7cm_ar002_delay008_q010_dq030.onnx"
     rl_pose_transition_s: 0.5
     rl_entry_timeout_s: 5.0
     rl_entry_tolerance_rad: 0.25

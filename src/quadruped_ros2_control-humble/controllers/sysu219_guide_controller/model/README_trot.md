@@ -1,10 +1,11 @@
 # SYSU219 原地 trot：ROS 名义站姿与 7 cm 模型
 
-当前 Gazebo、真机 YAML 指定的模型均为 `policy_trot_ros_dr_7cm.onnx`，
-相对于安装包 `share/sysu219_guide_controller/model/`。
-来源为 `2026-10-27_17-25-46_ros_dr_7cm/model_2999.pt`，包含域随机化训练。
-对应 JSON 记录 checkpoint、模型哈希、保存配置哈希和完整部署契约。
-旧 `policy.onnx`、`policy_trot_in_place.onnx`、`policy_trot_ros_nominal_7cm.onnx` 及其 JSON 保留用于溯源。
+当前 Gazebo 使用 `policy_trot_dr7cm_ar002_delay008_q010_dq030.onnx`，来源为
+`2026-11-09_15-30-49_ros_dr_7cm_ar002_delay008_q010_dq030/model_2999.pt`。
+该版本 action_rate=-0.02、初始关节偏移±0.10 rad、初始关节速度±0.30 rad/s，额外动作/观测延迟0～8 ms。
+真机 YAML 仍保留上一版 `policy_trot_ros_dr_7cm.onnx`；旧模型与JSON均保留。
+新旧模型部署契约一致，安装目录已补齐新模型链接，重启Gazebo后加载。
+下方归档导出示例仍对应上一版；当前模型JSON记录本次完整来源与随机化范围。
 
 ## 当前部署约定
 
@@ -64,3 +65,15 @@ ROS 部署不人工加入噪声或随机化参数。训练使用域随机化不�
 
 
 工作区已纳入 `rl_training/robot_lab/` 源码和最终实验归档；最新可移植命令见工作区 `docs/sysu219_rl.md`。历史JSON中的原路径用于来源记录，不作为当前运行路径。
+
+
+## 新增对照策略（未切换默认路径）
+
+- `policy_trot_dr7cm_ar003_q010_dq030.onnx`：action_rate=-0.03，额外动作/观测延迟0～4 ms。
+- `policy_trot_dr7cm_ar002_delay008_q010_dq030.onnx`：action_rate=-0.02，额外动作/观测延迟0～8 ms。
+
+两版初始关节角扰动均为±0.10 rad、初始关节速度±0.30 rad/s；每版均附同名JSON和.h文件。
+均从对应正式训练的model_2999.pt导出，部署契约与当前控制器一致。
+安装目录已链接两份模型；测试时修改gazebo.yaml中的rl_model_path为所选文件名，然后重启Gazebo。
+当前Gazebo/真机路径与活动TrotPolicyConfig.h未自动切换；不需要为同契约换权重重新编译。
+校验记录见analysis/sysu219_ar003_delay008_export/（本机忽略目录）。

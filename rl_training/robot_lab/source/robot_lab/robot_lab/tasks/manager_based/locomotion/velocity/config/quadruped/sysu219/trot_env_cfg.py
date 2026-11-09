@@ -154,7 +154,7 @@ class RewardsCfg:
     joint_torques = RewTerm(func=lab_mdp.joint_torques_l2, weight=-1.0e-5, params={"asset_cfg": joints_asset()})
     joint_acceleration = RewTerm(func=lab_mdp.joint_acc_l2, weight=-2.5e-7, params={"asset_cfg": joints_asset()})
     joint_limits = RewTerm(func=lab_mdp.joint_pos_limits, weight=-5.0, params={"asset_cfg": joints_asset()})
-    action_rate = RewTerm(func=lab_mdp.action_rate_l2, weight=-0.01)
+    action_rate = RewTerm(func=lab_mdp.action_rate_l2, weight=-0.02)
     failed = RewTerm(func=lab_mdp.is_terminated, weight=-5.0)
 
 
@@ -277,3 +277,19 @@ class SYSU219TrotDREnvCfg_PLAY(SYSU219TrotDREnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.scene.num_envs = 16
+
+
+@configclass
+class SYSU219TrotDRAR003EnvCfg(SYSU219TrotDREnvCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.action_rate.weight = -0.03
+
+
+@configclass
+class SYSU219TrotDRDelay008EnvCfg(SYSU219TrotDREnvCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.domain_randomization.ranges["action_delay_steps"] = [0, 4]
+        self.domain_randomization.ranges["observation_delay_steps"] = [0, 4]
+        self.scene.robot.actuators["legs"].max_action_delay_steps = 4

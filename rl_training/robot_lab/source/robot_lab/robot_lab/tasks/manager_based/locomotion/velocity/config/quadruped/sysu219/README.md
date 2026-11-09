@@ -156,7 +156,7 @@ IMU roll/pitch偏差 ±1°。编码器零位同时影响 PD 反馈和 actor 观�
 观测延迟使用2 ms历史采样，并非20 ms策略帧延迟；部分重置只清理对应环境历史。
 策略动作历史与时钟保持真实输入，不加入虚假噪声。
 
-初始关节角 ±0.02 rad、roll/pitch ±2°、水平速度每轴 ±0.03 m/s；
+初始关节角 ±0.10 rad、初始关节速度 ±0.30 rad/s、roll/pitch ±2°、水平速度每轴 ±0.03 m/s；
 不修改 default_joint_pos，避免随机化改变 ROS 的观测偏置和动作默认角。
 没有外力推扰、地形、强度衰减或随机硬限位。critic 和奖励使用干净仿真状态。
 
@@ -179,3 +179,9 @@ python scripts/reinforcement_learning/rsl_rl/train.py \
 
 
 路径约定：在工作区根目录设置 `export WS_ROOT="$PWD"`、`export ROBOT_LAB_ROOT="$WS_ROOT/rl_training/robot_lab"`。最新复现步骤见工作区 `docs/sysu219_rl.md`。
+
+
+2026-11-05 新训练设置：action_rate 权重由 -0.01 改为 -0.02；初始关节角偏移改为 ±0.10 rad，新增初始关节速度 ±0.30 rad/s。两者每回合重置采样，名义环境保持零扰动，default_joint_pos/default_joint_vel 不变。扩大重置范围后需检查初始足端穿透、冲击和恢复情况；该变更未运行验证。归档的旧 checkpoint 与保存配置不受影响。
+
+
+新增对照任务：`RobotLab-Isaac-Trot-InPlace-SYSU219-DR-AR003-v0` 仅将action_rate改为-0.03；`RobotLab-Isaac-Trot-InPlace-SYSU219-DR-Delay008-v0` 保持-0.02，动作和观测额外延迟改为0/2/4/6/8 ms。其余均继承当前基线（初始角±0.10 rad、初始速度±0.30 rad/s），原任务保持原配置。动作缓存容量为最大延迟步数加1，观测历史按最大延迟分配。可在play.py中直接使用对应任务ID和`--num_envs 16 --skip-export`测试相同范围。

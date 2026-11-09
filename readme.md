@@ -14,10 +14,16 @@
 
 使用 **ROS 名义参数＋域随机化、7 cm 抬腿目标的原地 trot 策略**：
 
-- ROS模型：[policy_trot_ros_dr_7cm.onnx](src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/model/policy_trot_ros_dr_7cm.onnx)。
-- 训练来源：`2026-10-27_17-25-46_ros_dr_7cm/model_2999.pt`。
-- 归档：[最终checkpoint与训练配置](rl_training/experiments/sysu219/ros_dr_7cm/)。
-- Gazebo和真机配置中的 `rl_model_path` 均指向该模型；按 `7` 进入RLWALK。
+| 策略文件 | action_rate | 额外动作/观测延迟 |
+|---|---:|---:|
+| [policy_trot_dr7cm_ar002_q010_dq030.onnx](src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/model/policy_trot_dr7cm_ar002_q010_dq030.onnx) | -0.02 | 0～4 ms |
+| [policy_trot_dr7cm_ar003_q010_dq030.onnx](src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/model/policy_trot_dr7cm_ar003_q010_dq030.onnx) | -0.03 | 0～4 ms |
+| [policy_trot_dr7cm_ar002_delay008_q010_dq030.onnx](src/quadruped_ros2_control-humble/controllers/sysu219_guide_controller/model/policy_trot_dr7cm_ar002_delay008_q010_dq030.onnx) | -0.02 | 0～8 ms |
+
+以上三版初始关节角扰动均为±0.10 rad、初始关节速度±0.30 rad/s，各附同名部署JSON。
+当前Gazebo选择延迟鲁棒版；真机配置仍为上一版 `policy_trot_ros_dr_7cm.onnx`。
+通过对应YAML的 `rl_model_path` 选择模型，重启后生效，按7进入RLWALK。
+上一版归档见 [checkpoint与训练配置](rl_training/experiments/sysu219/ros_dr_7cm/)。
 
 ## 训练与测试命令
 

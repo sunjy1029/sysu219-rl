@@ -10,6 +10,8 @@ import sys
 
 
 SYSU219_TASKS = {
+    "RobotLab-Isaac-Trot-InPlace-SYSU219-DR-AR003-v0",
+    "RobotLab-Isaac-Trot-InPlace-SYSU219-DR-Delay008-v0",
     "RobotLab-Isaac-Trot-InPlace-SYSU219-v0",
     "RobotLab-Isaac-Trot-InPlace-SYSU219-Play-v0",
     "RobotLab-Isaac-Trot-InPlace-SYSU219-DR-v0",

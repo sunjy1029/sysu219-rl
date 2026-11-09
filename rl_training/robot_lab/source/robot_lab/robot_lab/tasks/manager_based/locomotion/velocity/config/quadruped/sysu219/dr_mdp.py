@@ -38,9 +38,11 @@ def startup(env, env_ids):
     joint_ids, _ = robot.find_joints(SYSU219_JOINT_NAMES, preserve_order=True)
     actuator = robot.actuators["legs"]
     env._sysu219_dr = dict(mask=mask, joint_ids=joint_ids, cfg=cfg,
-                           history=torch.zeros((2, n, 30), device=env.device),
+                           history=torch.zeros((max(1, cfg["observation_delay_steps"][1]), n, 30), device=env.device),
                            head=0, cache=None, cache_step=-1)
     state = env._sysu219_dr
+    if cfg["action_delay_steps"][1] >= actuator._history_length:
+        raise ValueError("Action delay exceeds actuator history capacity")
     # The shared plane is 1.0/min. These per-robot values therefore determine
     # effective contact friction, including the nominal subset's exact 0.2.
     materials = robot.root_physx_view.get_material_properties().clone()
@@ -89,7 +91,7 @@ def startup(env, env_ids):
     # Sensor history is captured at each 2 ms actuator tick. Observation delay
     # zero reads fresh post-physics state, delays 1/2 read t-2/t-4 ms histories.
     def record():
-        state["head"] = (state["head"]+1) % 2
+        state["head"] = (state["head"]+1) % state["history"].shape[0]
         state["history"][state["head"]] = _raw(env)
     actuator.observation_callback = record
     print(f"[SYSU219 DR] {int((~mask).sum())}/{n} nominal environments; remaining randomized; schema={cfg['schema']}")
@@ -146,7 +148,9 @@ def reset(env, env_ids):
     robot.write_root_state_to_sim(root, env_ids=ids)
     q = robot.data.default_joint_pos[ids].clone()
     q[:, state["joint_ids"]] += sample("initial_joint_offset_rad", 12)
-    robot.write_joint_state_to_sim(q, robot.data.default_joint_vel[ids], env_ids=ids)
+    dq = robot.data.default_joint_vel[ids].clone()
+    dq[:, state["joint_ids"]] += sample("initial_joint_velocity_rad_s", 12)
+    robot.write_joint_state_to_sim(q, dq, env_ids=ids)
     # Do not change default_joint_pos: it defines actor offsets and ROS targets.
     state["history"][:, ids] = _raw(env)[ids].unsqueeze(0)
     state["cache"] = None
@@ -165,9 +169,9 @@ def _observed(env):
         return state["cache"]
     result = _raw(env).clone()
     delay = state["observation_delay"][:, 0].long()
-    for lag in (1, 2):
+    for lag in range(1, state["history"].shape[0]+1):
         selected = delay == lag
-        result[selected] = state["history"][(state["head"]-(lag-1)) % 2, selected]
+        result[selected] = state["history"][(state["head"]-(lag-1)) % state["history"].shape[0], selected]
     result[:, 0:3] = quat_apply_inverse(state["imu_bias"], result[:, 0:3]) + state["gyro_bias"]
     result[:, 3:6] = quat_apply_inverse(state["imu_bias"], result[:, 3:6])
     result[:, 6:18] += state["encoder_bias"]

@@ -41,7 +41,8 @@ def main():
         require([d.dim_value for d in item.type.tensor_type.shape.dim] == shape, "Tensor shape mismatch")
     header = (package / "include/sysu219_guide_controller/control/TrotPolicyConfig.h").read_text()
     require(f'kContractSha256 = "{digest}"' in header, "C++ contract hash mismatch")
-    require(f'kModelFile = {json.dumps(model_path.name)};' in header, "C++ model filename mismatch")
+    # Runtime selects the model via rl_model_path, not kModelFile. Compatible
+    # weights may have different filenames; validate the contract and arrays.
     arrays = {name: [float(v.strip()) for v in values.split(",")] for name, values in
               re.findall(r"std::array<double, 12> (\w+) = \{([^}]+)\};", header)}
     for name, key in (("kDefaultPosition", "default_joint_positions"), ("kDefaultVelocity", "default_joint_velocities"),
@@ -69,7 +70,12 @@ def main():
     for filename in ("gazebo.yaml", "robot_control.yaml"):
         config = yaml.safe_load((config_root / filename).read_text())
         parameters = config["sysu219_guide_controller"]["ros__parameters"]
-        require(parameters["rl_model_path"] == configured_model, "Real/Gazebo model paths differ")
+        selected_path = Path(parameters["rl_model_path"])
+        if not selected_path.is_absolute():
+            selected_path = package / "model" / selected_path
+        selected_report = json.loads(selected_path.with_suffix(".json").read_text())
+        require(selected_report["contract"] == contract, "Configured model contract differs: " + filename)
+        require(hashlib.sha256(selected_path.read_bytes()).hexdigest() == selected_report["onnx_sha256"], "Configured model hash differs: " + filename)
         require(parameters["joints"] == contract["joint_names"], "Configured controller joint names differ")
         stand = parameters["stand_pos"]
         require(len(stand) == 12 and all(math.isfinite(q) for q in stand), "Invalid ROS stand_pos")

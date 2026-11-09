@@ -36,6 +36,7 @@ class RosPDActuatorCfg(IdealPDActuatorCfg):
     class_type: type = RosPDActuator
     response_time_s: float = 0.004
     update_dt_s: float = 0.002
+    max_action_delay_steps: int = 2
 
 
 class RandomizedRosPDActuator(RosPDActuator):
@@ -46,7 +47,10 @@ class RandomizedRosPDActuator(RosPDActuator):
         self.response_times = torch.full_like(self.applied_effort[:, :1], cfg.response_time_s)
         self.encoder_bias = torch.zeros_like(self.applied_effort)
         self.delay_steps = torch.zeros(self._num_envs, dtype=torch.long, device=self._device)
-        self._command_history = torch.zeros((3, *self.applied_effort.shape), device=self._device)
+        self._history_length = cfg.max_action_delay_steps + 1
+        if self._history_length < 1:
+            raise ValueError("Negative action delay capacity")
+        self._command_history = torch.zeros((self._history_length, *self.applied_effort.shape), device=self._device)
         self._history_ready = torch.zeros(self._num_envs, dtype=torch.bool, device=self._device)
         self._head = 0
         self._env_ids = torch.arange(self._num_envs, device=self._device)
@@ -72,10 +76,10 @@ class RandomizedRosPDActuator(RosPDActuator):
         missing = ~self._history_ready
         self._command_history[:, missing] = command[missing].unsqueeze(0)
         self._history_ready[:] = True
-        self._head = (self._head+1) % 3
+        self._head = (self._head+1) % self._history_length
         self._command_history[self._head] = command
         control_action.joint_positions = self._command_history[
-            (self._head-self.delay_steps) % 3, self._env_ids].clone()
+            (self._head-self.delay_steps) % self._history_length, self._env_ids].clone()
         return super().compute(control_action, joint_pos+self.encoder_bias, joint_vel)
 
 
